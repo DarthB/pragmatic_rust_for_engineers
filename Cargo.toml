@@ -1,0 +1,19 @@
+[workspace]
+members = ["haber_bosch"]
+resolver = "2"
+
+[workspace.package]
+authors = ["Tim Janus <pragmatic_rust_course@janus.rs>"]
+version = "0.1.0"
+edition = "2021"
+
+description = "These crates contain the source code developed for the 'Pragmatic Rust for Engineers' course. See the README.md for more details."
+readme = "README.md"
+
+license = "MIT or Apache-2.0"
+
+keywords = ["learning", "engineering", "simulation", "science"]
+categories = ["science", "simulation"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace.dependencies]
