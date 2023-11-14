@@ -1,3 +1,5 @@
+pub mod hints;
+
 fn main() {
-    println!("Hello, world!");
+    hints::hint_main();
 }
