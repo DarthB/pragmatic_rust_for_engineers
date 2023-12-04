@@ -8,7 +8,11 @@ Rust programming and/or to solve engineering problems. Therefore the series addr
 
 In the first part of the series we will investigate the Haber-Bosch process for Ammonia production. Haber-Bosch consumes 1.1% of the world's energy supply, and is responsible for 1.8% of the world's CO2 emissions. First, we will concentrate on simulating the reaction along a plug flow reactor, then add some plots to visualize our results and we conclude with some interaction via Web Assembly.
 
+[Read Jonathan Ayalas Blog Article](https://janus.rs/en/2023/12/the-haber-bosch-process-revolutionizing-agriculture-and-industry/) about Haber-Bosch if you want to learn more.
+
 ## How to Learn with Pragmatic Rust for Engineers
+
+[Read Tim Janus Blog Article](https://janus.rs/en/2023/12/why-learning-rust-is-worthwhile-for-engineers/) - if you want to know why learning Rust is worthwhile as an Engineer.
 
 Pragmatic Rust for Engineers is a video series that teaches programming by applied coding on (simplified) engineering problems inspired from the real world. We propose four different learning strategies but it's up to you to choose what suits you best. We just want to add switching difficulty is always possible and redoing on a harder mode is always an option. The content is quite dense so don't beat yourself up, have fun and reach out if you have any questions.
 
@@ -31,20 +35,12 @@ When choosing 4,3 or 2 you can use git as version control system to support you 
 
 ## Video Directory
 
-- 0/x Pragmatic Rust for Engineers: Install
-    - [Video (TBA)]()
-- 1/x Pragmatic Rust for Engineers: Steady-state Haber-Bosch Reaction
-    - [Video (TBA)]()
-    - [Task](./haber_bosch/tasks.md#video-01---steady-state-haber-bosch-reaction)
-    - [Hints (TBA)]()
-- 2/x Pragmatic Rust for Engineers: Plotting and strengthening Iterator usage
-    - [Video (TBA)]()
-    - [Task (TBA)]()
-    - [Hints (TBA)]()
-- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly)
-    - [Video (TBA)]()
-    - [Task (TBA)]()
-    - [Hints (TBA)]()
+Beware sometimes we add the link here but the Video is scheduled later on YouTube.
+
+- [0/x Pragmatic Rust for Engineers: Setting up your Rust Development Environment on Windows](https://www.youtube.com/watch?v=9DU2oglBj54) - 2023-12-04 8:00am CET
+- [1/x Pragmatic Rust for Engineers: Steady-state Haber-Bosch Reaction](https://www.youtube.com/watch?v=_phBAnY8vkM) - 2023-05-12 6:30am CET
+- 2/x Pragmatic Rust for Engineers: Plotting and stronger Iterator Usage - TBA (approx mid of December)
+- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (approx End of December)
 
 ## License
 
