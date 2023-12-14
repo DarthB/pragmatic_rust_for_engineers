@@ -1,12 +1,8 @@
-# Haber-Bosch Tasks and Implementation Plan
-
-This file contains coarse step-wise implementation plans for our work with the Haber-Bosch process.
-
-## Video 01 - Steady-state Haber-Bosch Reaction
+# Tasks - Video 01 - Steady-state Haber-Bosch Reaction
 
 In this task the Haber-Bosch process will be simulated by using an ODE solver provided by the crate [ode_solvers](https://srenevey.github.io/ode-solvers/).
 
-### Learn Goals
+## Learn Goals
 
 General:
 
@@ -21,7 +17,7 @@ Rust:
 - [ ] (advanced) Implement a `trait` of an external crate, here an solver for ODEs, to use it's functionality with custom types.
 - [ ] (advanced) Coarse Theory behind static type system and ownership
 
-### Implementation Plan and Coarse Tasks
+## Implementation Plan and Coarse Tasks
 
 1. Add dependency to ode_solvers (version 0.3.7) in `cargo.toml`   
     - Either run `cargo add ode_solvers --vers 0.3.7` or edit `cargo.toml` directly
@@ -37,7 +33,7 @@ Rust:
     - Use an `iterator` and sum the concentrations in each time step.
     - Compare your results with the solution given in the video
 
-### References
+## References
 
 As some of your starting your journey with Rust and this course cannot give an in-depth introduction but focuses and solving problems with Rust and on this way just provides **enough** detail, we want to make you aware of those three very good starter materials:
 
@@ -48,11 +44,3 @@ As some of your starting your journey with Rust and this course cannot give an i
 Here you will appy, contents of [Chapter 3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html), [Chapter 5](https://doc.rust-lang.org/book/ch05-00-structs.html) and the advanced conept of traits explained in [Chapter 10.2](https://doc.rust-lang.org/book/ch10-02-traits.html).
 
 [Chapter 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) contains concepts unique to Rust and to understand the difference between Rust and other languages it is very important and exciting. So we recommend a read but it's fine to skip and be fine if you fully understood after first read through. Most do not. 
-
-## Video 02 - Related to plots:
-
-Coming next:
-
-Plotting with the [plotters-rs crate](https://github.com/plotters-rs/plotters) and more on **Iterators**
-
-![A plot of the reaction system in the Haber-Bosch process](res/outlook.png)

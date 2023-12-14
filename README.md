@@ -39,8 +39,14 @@ Beware sometimes we add the link here but the Video is scheduled later on YouTub
 
 - [0/x Pragmatic Rust for Engineers: Setting up your Rust Development Environment on Windows](https://www.youtube.com/watch?v=9DU2oglBj54) - 2023-12-04 8:00am CET
 - [1/x Pragmatic Rust for Engineers: Steady-state Haber-Bosch Reaction](https://www.youtube.com/watch?v=_phBAnY8vkM) - 2023-05-12 6:30am CET
-- 2/x Pragmatic Rust for Engineers: Plotting and stronger Iterator Usage - TBA (approx mid of December)
-- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (approx End of December)
+  - [Tasks](haber_bosch/tasks.md)
+  - [Hints](haber_bosch/src/hints.rs)
+  - [Solution](haber_bosch/src/solution.rs)
+- 2/x Pragmatic Rust for Engineers: Simulate and visualize a multi-bed Haber-Bosch Reactor - (TBA - soon)
+  -  [Tasks](haber_bosch/v2_tasks.md)
+  -  [Hints](haber_bosch/src/v2_hints.rs)
+  -  TBA Solution
+- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (TBA - approx Early January)
 
 ## License
 
