@@ -3,7 +3,21 @@ name = "haber_bosch"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "hb_ode_test"
+path = "src/main.rs"
+
+[[bin]]
+name = "hb_plot_test"
+path = "src/v2_main_plot.rs"
+
+[[bin]]
+name = "hb_seq_simulation"
+path = "src/v2_main.rs"
+
 
 [dependencies]
 ode_solvers = "0.3.7"
+plotters = "0.3.5"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
