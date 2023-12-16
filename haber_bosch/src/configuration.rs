@@ -39,3 +39,31 @@ pub struct HaberBoschInstance {
     reactor_results: Vec<HaberBoschBedResult>,
 }
 
+// NEW CODE:
+
+pub struct HaberBoschInstanceBuilder {
+    wip: HaberBoschInstance,
+}
+
+impl HaberBoschInstanceBuilder {
+    pub fn create(p: f64, c: Catalyst) -> Self {
+        HaberBoschInstanceBuilder { 
+            wip: HaberBoschInstance { 
+                partial_pressure: p, 
+                catalyst: c, 
+                reactor_beds: vec![], 
+                reactor_results: vec![] 
+        } }
+    }
+
+    pub fn add_bed(mut self, t_start: f64, t_slope: f64, t_max: f64, beta: f64) -> Self {
+        todo!{"add bed"};
+        self
+    }
+
+    pub fn build(self) -> HaberBoschInstance {
+        todo!("do a sanity check");
+
+        self.wip
+    }
+}
