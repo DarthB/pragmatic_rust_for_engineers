@@ -8,8 +8,8 @@ use crate::configuration::{Catalyst, HaberBoschBedSetup, HaberBoschInstance};
 pub type State = Vector6<f64>; // 5 mixture components and temperature [nitrogn, hydrogen, ammonia, argon, metan, temperature]
 
 pub fn sequential_simulation(inst: &mut HaberBoschInstance, verbose: bool) {
-    let idx:usize = todo!("loop over beds"); {
-        let solver_info: HaberBoschSolverInfo = todo!{"access solver setup"};
+    for idx in 0..inst.len() {
+        let solver_info: HaberBoschSolverInfo = inst.get_solver_info(idx);
 
         if verbose {
             println!(
@@ -46,7 +46,7 @@ pub fn sequential_simulation(inst: &mut HaberBoschInstance, verbose: bool) {
         let x_out = stepper.x_out();
         let y_out = stepper.y_out();
 
-        todo!{"Store results"};
+        inst.add_next_results(x_out.clone(), y_out.clone());
     }
 }
 

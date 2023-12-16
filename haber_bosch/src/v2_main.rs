@@ -1,6 +1,6 @@
 #![allow(unreachable_code)]
 #![allow(unused)]
-use crate::configuration::{Catalyst, HaberBoschInstanceBuilder};
+use crate::{configuration::{Catalyst, HaberBoschInstanceBuilder}, simulation::sequential_simulation};
 
 pub mod simulation;
 pub mod configuration;
@@ -26,7 +26,7 @@ fn main()
     for (cat, fn_pref) in studies
     {
         // configure Haber-Bosch case-study (mostly module configuration in configuration.rs)
-        let conf = match cat {
+        let mut conf = match cat {
             Catalyst::KMIR => {
                 HaberBoschInstanceBuilder::create(KMIR_REACTOR_PRESSURE, cat)
                     .add_bed(KMIR_B1_TS, KMIR_B1_TR, KMIR_B1_TM, KMIR_B1_B)
@@ -44,6 +44,8 @@ fn main()
         println!("{:?}", conf);
 
         // simulate Haber-Bosch case-study (mostly module simulation in simulation.rs)
+        sequential_simulation(&mut conf, false);
+        conf.print_summary();
 
         // visualize Haber-Bosch case-study (feed module visualization (visualization.rs) from configuration)
     }

@@ -2,6 +2,7 @@
 name = "haber_bosch"
 version = "0.1.0"
 edition = "2021"
+default-run = "hb_seq_simulation"
 
 [[bin]]
 name = "hb_ode_test"

@@ -1,4 +1,4 @@
-use crate::simulation::{self, State};
+use crate::simulation::{self, State, HaberBoschModel, HaberBoschSolverInfo};
 
 #[derive(Debug, Copy, Clone)]
 pub enum Catalyst {
@@ -50,7 +50,7 @@ impl HaberBoschInstance {
         self.catalyst
     }
 
-    pub fn pressure(&self) -> f64 {
+    pub fn pres(&self) -> f64 {
         self.partial_pressure
     }
 
@@ -63,24 +63,63 @@ impl HaberBoschInstance {
     }
 
     pub fn get_solver_info(&self, idx: usize) -> simulation::HaberBoschSolverInfo {
-        todo!{"Sanity check"}
+        if idx > self.reactor_results.len() {
+            panic!("Not enough results");
+        }
 
-        todo!{"create based on 'idx' bed"}
+        let model = HaberBoschModel::new(
+            self.pres(), 
+            self.cat(), 
+            self.reactor_beds[idx]);
 
-        todo!{"get x0"}
+        let x0 = if idx == 0 {
+            0.
+        } else {
+           *self.reactor_results[idx-1].x_out.iter().last().unwrap()
+        };
 
-        todo!{"get y0"};
-        // the partial gas pressure
-        let mut pp = State::new(
-            0.2391,
-            0.623,
-            0.0413,
-            0.0793,
-            0.0172,
-            0.,
+        let mut y0 = if idx == 0 {
+        
+            // the partial gas pressure
+            let mut pp = State::new(
+                0.2391,
+                0.623,
+                0.0413,
+                0.0793,
+                0.0172,
+                0.,
+            );
+            pp = pp * self.pres();
+            pp
+        } else {
+            *self.reactor_results[idx-1].y_out.iter().last().unwrap()
+        };
+        y0[5] = self.reactor_beds[idx].t_start;
+
+        HaberBoschSolverInfo { model, x0, y0 }
+    }
+
+    pub fn print_summary(&self) {
+        let len_iter = self.reactor_results.iter().map(|el| *el.x_out.last().unwrap());
+
+        println!("Summary based on {}", self.catalyst.to_string());
+
+        print!("Reactor Length: ");
+        let mut before = 0.;
+        for (idx, len) in len_iter.clone().enumerate() {
+            if idx > 0 {
+                print!(" + ");
+            }
+            print!("{:.3}", len - before);
+            before = before + len;
+        }
+        println!(" = {:.3}", len_iter.last().unwrap());
+
+        let last_y = self.reactor_results.iter().last().unwrap().y_out.last().unwrap();
+        println!(
+            "Final Yield: {}\n",
+            last_y[2] / (last_y.iter().take(5).sum::<f64>())
         );
-
-        todo!("Return information")
     }
 }
 
@@ -111,5 +150,14 @@ impl HaberBoschInstanceBuilder {
         }
 
         self.wip
+    }
+}
+
+impl ToString for Catalyst {
+    fn to_string(&self) -> String {
+        match self {
+            Catalyst::FN => "Catalyst FN".to_owned(),
+            Catalyst::KMIR => "Catalyst KMIR".to_owned(),
+        }
     }
 }
