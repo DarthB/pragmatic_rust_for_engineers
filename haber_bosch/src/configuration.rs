@@ -1,4 +1,4 @@
-use crate::simulation;
+use crate::simulation::{self, State};
 
 #[derive(Debug, Copy, Clone)]
 pub enum Catalyst {
@@ -41,6 +41,49 @@ pub struct HaberBoschInstance {
 }
 
 // NEW CODE:
+impl HaberBoschInstance {
+    pub fn len(&self) -> usize {
+        self.reactor_beds.len()
+    }
+
+    pub fn cat(&self) -> Catalyst {
+        self.catalyst
+    }
+
+    pub fn pressure(&self) -> f64 {
+        self.partial_pressure
+    }
+
+    pub fn add_next_results(&mut self, x: Vec<f64>, y: Vec<simulation::State>) {
+        if self.reactor_results.len() >= self.reactor_beds.len() {
+            panic!("There cannot be more results then beds");
+        }
+
+        self.reactor_results.push(HaberBoschBedResult { x_out: x, y_out: y })
+    }
+
+    pub fn get_solver_info(&self, idx: usize) -> simulation::HaberBoschSolverInfo {
+        todo!{"Sanity check"}
+
+        todo!{"create based on 'idx' bed"}
+
+        todo!{"get x0"}
+
+        todo!{"get y0"};
+        // the partial gas pressure
+        let mut pp = State::new(
+            0.2391,
+            0.623,
+            0.0413,
+            0.0793,
+            0.0172,
+            0.,
+        );
+
+        todo!("Return information")
+    }
+}
+
 
 pub struct HaberBoschInstanceBuilder {
     wip: HaberBoschInstance,
