@@ -31,6 +31,7 @@ pub struct HaberBoschBedResult {
 // What data is needed by the ODE-solver and how can we provide it?
 
 // Let's code
+#[derive(Debug, Clone)]
 pub struct HaberBoschInstance { 
     partial_pressure: f64,
     catalyst: Catalyst,
@@ -57,12 +58,14 @@ impl HaberBoschInstanceBuilder {
     }
 
     pub fn add_bed(mut self, t_start: f64, t_slope: f64, t_max: f64, beta: f64) -> Self {
-        todo!{"add bed"};
+        self.wip.reactor_beds.push(HaberBoschBedSetup { beta, t_start, t_slope, t_max });
         self
     }
 
     pub fn build(self) -> HaberBoschInstance {
-        todo!("do a sanity check");
+        if self.wip.reactor_beds.is_empty() {
+            panic!("Reactor bed is require");
+        }
 
         self.wip
     }
