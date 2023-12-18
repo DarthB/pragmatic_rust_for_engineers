@@ -6,11 +6,30 @@ use plotters::{
     prelude::*,
 };
 
+
+/// Place new functions here:
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// HOMEWORK
+
+
 fn raise_range(orig: Range<f32>, percent: f32) -> Range<f32> {
     let range = (orig.end - orig.start) / 2.;
     let mid = orig.start + range;
     (mid - range * percent)..(mid + range * percent)
 }
+
 pub fn prepare_chart<'a, DB: DrawingBackend>(
     draw_area: &'a DrawingArea<DB, Shift>,
     caption: &str,
@@ -26,8 +45,10 @@ pub fn prepare_chart<'a, DB: DrawingBackend>(
         .set_left_and_bottom_label_area_size(40)
         .set_label_area_size(LabelAreaPosition::Right, 40)
         .margin(12)
-        .build_cartesian_2d(raise_range(x_range, 1.05f32), raise_range(y_range, 1.05f32))
-        .unwrap();
+        .build_cartesian_2d(
+            raise_range(x_range, 1.05f32),
+            raise_range(y_range, 1.05f32))
+            .unwrap();
 
     if with_mesh {
         chart

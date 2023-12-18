@@ -1,4 +1,8 @@
+use std::ops::Range;
+
 use crate::simulation::{self, State, HaberBoschModel, HaberBoschSolverInfo};
+
+use::itertools::Itertools;
 
 #[derive(Debug, Copy, Clone)]
 pub enum Catalyst {
@@ -120,6 +124,13 @@ impl HaberBoschInstance {
             "Final Yield: {}\n",
             last_y[2] / (last_y.iter().take(5).sum::<f64>())
         );
+    }
+
+    pub fn get_temperature_range(&self) -> Range<f32> {
+        // use::itertools::Itertools;
+        todo!{"Get MinMaxRes over iterator, tell about itertools"}
+        
+        todo!("Match MinMaxRes")
     }
 }
 

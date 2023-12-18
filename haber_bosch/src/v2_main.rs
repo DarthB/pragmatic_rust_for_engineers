@@ -1,12 +1,15 @@
 #![allow(unreachable_code)]
 #![allow(unused)]
-use crate::{configuration::{Catalyst, HaberBoschInstanceBuilder}, simulation::sequential_simulation};
+use crate::{configuration::{Catalyst, HaberBoschInstanceBuilder}, simulation::sequential_simulation, visualization::prepare_chart};
+
+use plotters::prelude::*;
 
 pub mod simulation;
 pub mod configuration;
 pub mod visualization;
 
-pub mod v2_hints; // this contains our model constants
+pub mod v2_hints; use plotters::element::BitMapElement;
+// this contains our model constants
 use v2_hints::*;
 
 
@@ -17,7 +20,7 @@ use v2_hints::*;
 // FN_B2_TS, FN_B2_TR, FN_B2_TM, FN_B2_B
 
 
-fn main()
+fn main() -> Result<(), Box<dyn std::error::Error>>
 {
     
     println!("Hello sequential Simulation!");
@@ -47,6 +50,27 @@ fn main()
         sequential_simulation(&mut conf, false);
         conf.print_summary();
 
+        //------------------------------------
+        // Prepared Plotting Code as in part 1
+        //------------------------------------
+
         // visualize Haber-Bosch case-study (feed module visualization (visualization.rs) from configuration)
+        let fn_temp_over_yield = fn_pref.to_owned() + "_temp_yield.png";
+        let resolution = (1920, 1080); 
+        let mut draw_area = BitMapBackend::new(
+            fn_temp_over_yield.as_str(), 
+            resolution)
+            .into_drawing_area();
+        draw_area.fill(&WHITE);
+
+        // Function from homework (refactoring prepare_chart function in Part 1)
+        prepare_chart(&draw_area, 
+            format!("Haber-Bosch Temperature over Ammonia Yield with {}", cat.to_string()).as_str(), 
+            ("concentration as Partial Fraction", "Temperature"),
+            todo!{}, todo!{}, true);
+
+        draw_area.present()?;
     }
+
+    Ok(())
 }
