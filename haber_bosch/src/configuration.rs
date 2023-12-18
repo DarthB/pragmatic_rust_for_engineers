@@ -128,9 +128,18 @@ impl HaberBoschInstance {
 
     pub fn get_temperature_range(&self) -> Range<f32> {
         // use::itertools::Itertools;
-        todo!{"Get MinMaxRes over iterator, tell about itertools"}
-        
-        todo!("Match MinMaxRes")
+        let min_max_res = self.reactor_results.iter()
+            .flat_map(|x| x.y_out.iter())
+            .map(|mat| mat[5] as f32 - 273f32)
+            .minmax_by(|lhs, rhs| {
+                lhs.partial_cmp(rhs).unwrap()
+            });
+
+        match min_max_res {
+            itertools::MinMaxResult::NoElements => 0f32..1f32,
+            itertools::MinMaxResult::OneElement(x) => x-0.5f32..x+0.5f32,
+            itertools::MinMaxResult::MinMax(a, b) => a..b,
+        }
     }
 }
 

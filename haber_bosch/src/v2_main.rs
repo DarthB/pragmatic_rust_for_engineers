@@ -67,7 +67,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
         prepare_chart(&draw_area, 
             format!("Haber-Bosch Temperature over Ammonia Yield with {}", cat.to_string()).as_str(), 
             ("concentration as Partial Fraction", "Temperature"),
-            todo!{}, todo!{}, true);
+            0f32..1f32, conf.get_temperature_range(), true);
 
         draw_area.present()?;
     }
