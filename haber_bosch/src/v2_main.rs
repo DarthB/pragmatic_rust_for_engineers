@@ -64,10 +64,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
         draw_area.fill(&WHITE);
 
         // Function from homework (refactoring prepare_chart function in Part 1)
-        prepare_chart(&draw_area, 
+        let mut chart = prepare_chart(&draw_area, 
             format!("Haber-Bosch Temperature over Ammonia Yield with {}", cat.to_string()).as_str(), 
             ("concentration as Partial Fraction", "Temperature"),
             0f32..1f32, conf.get_temperature_range(), true);
+
+        let it_ammonia = todo!{};
+        let it_temperature = todo!{};
+
+        chart
+            .draw_series(LineSeries::new(it_ammonia.zip(it_temperature), &BLACK))?
+            .label("Zig Zag")
+            .legend(move |(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &BLACK));
 
         draw_area.present()?;
     }

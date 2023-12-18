@@ -141,7 +141,32 @@ impl HaberBoschInstance {
             itertools::MinMaxResult::MinMax(a, b) => a..b,
         }
     }
+
+
+
+    pub fn iter_my<'a>(
+        &'a self,
+        component: usize,
+        normalize: bool,
+    ) -> MyIterator<'a> {
+        todo!{"Build Iterator"}
+    }
 }
+
+#[derive(Debug, Clone)]
+pub struct MyIterator<'a> {
+    instance: &'a HaberBoschInstance,
+}
+
+
+
+
+
+
+
+
+
+
 
 
 pub struct HaberBoschInstanceBuilder {
