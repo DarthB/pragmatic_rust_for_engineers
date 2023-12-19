@@ -1,3 +1,4 @@
+#![allow(unused)]
 use std::fmt::Display; // also this gives a warning we need it after uncommenting some lines
 
 // hint: this uses all the hints given for the task in a central place:
