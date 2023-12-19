@@ -56,36 +56,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
 
         // visualize Haber-Bosch case-study (feed module visualization (visualization.rs) from configuration)
         let fn_temp_over_yield = fn_pref.to_owned() + "_temp_yield.png";
-        let resolution = (1920, 1080); 
-        let mut draw_area = BitMapBackend::new(
-            fn_temp_over_yield.as_str(), 
-            resolution)
-            .into_drawing_area();
-        draw_area.fill(&WHITE);
-
-        // Function from homework (refactoring prepare_chart function in Part 1)
-        let mut chart = prepare_chart(&draw_area, 
-            format!("Haber-Bosch Temperature over Ammonia Yield with {}", cat.to_string()).as_str(), 
-            ("concentration as Partial Fraction", "Temperature"),
-            0f32..1f32, conf.get_temperature_range(), true);
-
-        let it_ammonia = conf.iter_my(2, true)
-            .map(|pair| pair.1);
-        let it_temperature = conf.iter_my(5, false)
-            .map(|(x, t)| t);
-
-    
-        let v: Vec<f32> = it_temperature.clone().collect();
-        println!("{:?}", v);
-        let v: Vec<f32> = it_ammonia.clone().collect();
-        println!("{:?}", v);
-
-        chart
-            .draw_series(LineSeries::new(it_ammonia.zip(it_temperature), &BLACK))?
-            .label("Zig Zag")
-            .legend(move |(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &BLACK));
-
-        draw_area.present()?;
+        visualization::draw_temperature_over_yield(fn_temp_over_yield.as_str(), &conf)?;
     }
 
     Ok(())
