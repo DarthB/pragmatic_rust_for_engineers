@@ -144,17 +144,37 @@ impl HaberBoschInstance {
 
 
 
+
+
+
+
     pub fn iter_my<'a>(
         &'a self,
         component: usize,
         normalize: bool,
     ) -> MyIterator<'a> {
-        todo!{"Build Iterator"}
+        if component > 5 {
+            panic!("Component too high");
+        }
+
+        MyIterator {
+            normalize,
+            comp_idx: component,
+            bed_idx: 0,
+            ele_idx: 0,
+            instance: self,
+        }
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct MyIterator<'a> {
+    normalize: bool,
+    comp_idx: usize,
+
+    bed_idx: usize,
+    ele_idx: usize,
+
     instance: &'a HaberBoschInstance,
 }
 
