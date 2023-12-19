@@ -50,11 +50,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
         sequential_simulation(&mut conf, false);
         conf.print_summary();
 
-        //------------------------------------
-        // Prepared Plotting Code as in part 1
-        //------------------------------------
-
         // visualize Haber-Bosch case-study (feed module visualization (visualization.rs) from configuration)
+        let fn_conc = fn_pref.to_owned() + "_conc.png";
+        visualization::draw_concentations(&fn_conc.as_str(), &conf)?;
+
         let fn_temp_over_yield = fn_pref.to_owned() + "_temp_yield.png";
         visualization::draw_temperature_over_yield(fn_temp_over_yield.as_str(), &conf)?;
     }

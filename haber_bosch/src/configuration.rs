@@ -142,11 +142,32 @@ impl HaberBoschInstance {
         }
     }
 
+    pub fn get_x_range(&self) -> Range<f32> {
+        let last = self
+            .reactor_results
+            .iter()
+            .map(|r| r.x_out.iter().last().unwrap())
+            .rev()
+            .nth(0)
+            .unwrap();
+        0f32..(*last as f32)
+    }
 
+    pub fn get_concentration_range(&self) -> Range<f32> {
+        let cmp = |a: &f64, b: &f64| a.partial_cmp(b).unwrap();
 
+        let max_conc = self
+            .reactor_results
+            .iter()
+            .flat_map(|el| el.y_out.iter())
+            .map(|mat| {
+                mat.iter().take(5).copied().max_by(cmp).unwrap() / mat.iter().take(5).sum::<f64>()
+            })
+            .max_by(cmp)
+            .unwrap() as f32;
 
-
-
+        0f32..max_conc + 0.1
+    }
 
     pub fn iter_my<'a>(
         &'a self,

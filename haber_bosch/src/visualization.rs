@@ -3,7 +3,7 @@ use std::ops::Range;
 use plotters::{
     chart::DualCoordChartContext,
     coord::{types::RangedCoordf32, Shift},
-    prelude::*,
+    prelude::*, style::full_palette::GREY_100,
 };
 
 use crate::configuration::HaberBoschInstance;
@@ -19,22 +19,22 @@ pub fn draw_temperature_over_yield(filename: &str, conf: &HaberBoschInstance) ->
         .into_drawing_area();
     draw_area.fill(&WHITE);
 
+    let max_ammonia = conf.iter_my(2, true)
+        .map(|(x, a)| a)
+        .max_by(|lhs, rhs| {
+            lhs.partial_cmp(rhs).unwrap()
+         }).unwrap();   
+
     // Function from homework (refactoring prepare_chart function in Part 1)
     let mut chart = prepare_chart(&draw_area, 
         format!("Haber-Bosch Temperature over Ammonia Yield with {}", conf.cat().to_string()).as_str(), 
         ("concentration as Partial Fraction", "Temperature"),
-        0f32..1f32, conf.get_temperature_range(), true);
+        0f32..max_ammonia, conf.get_temperature_range(), true);
 
     let it_ammonia = conf.iter_my(2, true)
         .map(|pair| pair.1);
     let it_temperature = conf.iter_my(5, false)
         .map(|(x, t)| t);
-
-
-    let v: Vec<f32> = it_temperature.clone().collect();
-    println!("{:?}", v);
-    let v: Vec<f32> = it_ammonia.clone().collect();
-    println!("{:?}", v);
 
     chart
         .draw_series(LineSeries::new(it_ammonia.zip(it_temperature), &BLACK))?
@@ -47,16 +47,70 @@ pub fn draw_temperature_over_yield(filename: &str, conf: &HaberBoschInstance) ->
 }
 
 
+pub fn draw_concentations(
+    filename: &str,
+    inst: &HaberBoschInstance,
+) -> Result<(), Box<dyn std::error::Error>> {
+    // @todo refactor into functions for part 1 plotting
+    let resolution = (1920, 1080);
 
+    let draw_area = BitMapBackend::new(filename, resolution).into_drawing_area();
+    draw_area.fill(&WHITE)?;
 
+    let mut chart = prepare_dual_chart(
+        &draw_area,
+        format!(
+            "Haber-Bosch Concentration Balances over Length with {}",
+            inst.cat().to_string()
+        )
+        .as_ref(),
+        ("Length Indicator", "Concentration as partial Fractions"),
+        inst.get_x_range(),
+        inst.get_concentration_range(),
+        inst.get_temperature_range(),
+        "Temperature [°C]",
+    );
 
+    let colors = [RED, BLUE, GREEN];
+    let labels = ["Nitrogen", "Hydrogen", "Ammonia"];
 
+    for idx in 0..=2 {
+        let style = ShapeStyle {
+            color: colors[idx].to_rgba(),
+            filled: false,
+            stroke_width: 1,
+        };
 
+        chart
+            .draw_series(LineSeries::new(inst.iter_my(idx, true), &colors[idx]))?
+            .label(labels[idx])
+            .legend(move |(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], style.to_owned()));
+    }
 
+    let style = ShapeStyle {
+        color: BLACK.to_rgba(),
+        filled: false,
+        stroke_width: 1,
+    };
 
+    chart
+        .draw_secondary_series(LineSeries::new(
+            inst.iter_my(5, false).map(|(x, t)| (x, t)),
+            &BLACK,
+        ))?
+        .label("Temperature [C°]")
+        .legend(move |(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], style.to_owned()));
 
+    chart
+        .configure_series_labels()
+        .border_style(&BLACK)
+        .background_style(&GREY_100)
+        .position(SeriesLabelPosition::UpperRight)
+        .label_font(("sans-serif", 24).into_font())
+        .draw()?;
 
-/// HOMEWORK
+    Ok(())
+}
 
 
 fn raise_range(orig: Range<f32>, percent: f32) -> Range<f32> {
@@ -111,11 +165,6 @@ draw_area.build_chart(|builder| {
             .draw()?;
     })
 */
-
-
-
-
-
 
 pub fn prepare_dual_chart<'a, DB: DrawingBackend>(
     draw_area: &'a DrawingArea<DB, Shift>,

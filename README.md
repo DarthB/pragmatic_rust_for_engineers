@@ -45,7 +45,7 @@ Beware sometimes we add the link here but the Video is scheduled later on YouTub
 - 2/x Pragmatic Rust for Engineers: Simulate and visualize a multi-bed Haber-Bosch Reactor - (TBA - soon)
   -  [Tasks](haber_bosch/v2_tasks.md)
   -  [Hints](haber_bosch/src/v2_hints.rs)
-  -  TBA Solution
+  -  Solution consist of [main](haber_bosch/src/v2_main.rs) function and [configuration](haber_bosch/src/configuration.rs), [simulation](haber_bosch/src/simulation.rs) and [visualization](haber_bosch/src/visualization.rs) module.
 - 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (TBA - approx Early January)
 
 ## License
