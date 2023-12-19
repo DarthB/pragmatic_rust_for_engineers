@@ -178,7 +178,43 @@ pub struct MyIterator<'a> {
     instance: &'a HaberBoschInstance,
 }
 
+impl<'a> Iterator for MyIterator<'a> {
+    type Item = (f32, f32);
 
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.bed_idx >= self.instance.reactor_results.len() {
+            None
+        } else {
+            
+            let bed_res = &self.instance.reactor_results[self.bed_idx];
+            let x = bed_res.x_out[self.ele_idx] as f32;
+
+            let comp = bed_res.y_out[self.ele_idx];
+            let mut y = *comp.iter().nth(self.comp_idx).unwrap() as f32;
+
+            if self.comp_idx == 5 {
+                // temperature
+                y = y - 273.;
+            } else if self.normalize {
+                let sum: f32 = comp
+                    .iter()
+                    .take(5)
+                    .map(|x| *x as f32)
+                    .sum();
+                y = y /sum;
+            }
+
+            // point to next element
+            self.ele_idx = self.ele_idx + 1;
+            if self.ele_idx >= bed_res.x_out.len() {
+                self.ele_idx = 0;
+                self.bed_idx = self.bed_idx + 1;
+            }
+
+            Some((x, y))
+        }
+    }
+} 
 
 
 

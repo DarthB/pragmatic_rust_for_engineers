@@ -69,8 +69,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
             ("concentration as Partial Fraction", "Temperature"),
             0f32..1f32, conf.get_temperature_range(), true);
 
-        let it_ammonia = todo!{};
-        let it_temperature = todo!{};
+        let it_ammonia = conf.iter_my(2, true)
+            .map(|pair| pair.1);
+        let it_temperature = conf.iter_my(5, false)
+            .map(|(x, t)| t);
+
+    
+        let v: Vec<f32> = it_temperature.clone().collect();
+        println!("{:?}", v);
+        let v: Vec<f32> = it_ammonia.clone().collect();
+        println!("{:?}", v);
 
         chart
             .draw_series(LineSeries::new(it_ammonia.zip(it_temperature), &BLACK))?
