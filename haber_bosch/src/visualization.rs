@@ -61,6 +61,27 @@ pub fn prepare_chart<'a, DB: DrawingBackend>(
     chart
 }
 
+/*
+// IDEA for not exposing life times: USE Closures, e.g.:
+// fn build_chart(&'a self, build_fn: Fn, adapt_chart_fn: Fn) -> Result<ChartContext<'a, ...>, Error>
+draw_area.build_chart(|builder| {
+        builder
+            .caption("Title")
+            .set_left_and_bottom_label_area_size(40)
+            .build_cartesian_2d(0f32..10f32, 0f32..100f32)?;
+    }, |chart| {
+        chart.configure.mesh()
+            .x_desc("Magic Numbers")
+            .y_desc("Magic Heights")
+            .draw()?;
+    })
+*/
+
+
+
+
+
+
 pub fn prepare_dual_chart<'a, DB: DrawingBackend>(
     draw_area: &'a DrawingArea<DB, Shift>,
     caption: &str,
