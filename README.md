@@ -10,6 +10,13 @@ In the first part of the series we will investigate the Haber-Bosch process for 
 
 [Read Jonathan Ayalas Blog Article](https://janus.rs/en/2023/12/the-haber-bosch-process-revolutionizing-agriculture-and-industry/) about Haber-Bosch if you want to learn more.
 
+The diagrams were investigating are Concentration Balance Diagrams and Temperature over Yield diagrams:
+
+![](haber_bosch/res/HB_KMIR_conc.png)
+
+![](haber_bosch/res/HB_FN_temp_yield.png)
+
+
 ## How to Learn with Pragmatic Rust for Engineers
 
 [Read Tim Janus Blog Article](https://janus.rs/en/2023/12/why-learning-rust-is-worthwhile-for-engineers/) - if you want to know why learning Rust is worthwhile as an Engineer.
@@ -38,15 +45,15 @@ When choosing 4,3 or 2 you can use git as version control system to support you 
 Beware sometimes we add the link here but the Video is scheduled later on YouTube.
 
 - [0/x Pragmatic Rust for Engineers: Setting up your Rust Development Environment on Windows](https://www.youtube.com/watch?v=9DU2oglBj54) - 2023-12-04 8:00am CET
-- [1/x Pragmatic Rust for Engineers: Steady-state Haber-Bosch Reaction](https://www.youtube.com/watch?v=_phBAnY8vkM) - 2023-05-12 6:30am CET
+- [1/x Pragmatic Rust for Engineers: Steady-state Haber-Bosch Reaction](https://www.youtube.com/watch?v=_phBAnY8vkM) - 2023-12-05 6:30am CET
   - [Tasks](haber_bosch/tasks.md)
   - [Hints](haber_bosch/src/hints.rs)
   - [Solution](haber_bosch/src/solution.rs)
-- 2/x Pragmatic Rust for Engineers: Simulate and visualize a multi-bed Haber-Bosch Reactor - (TBA - soon)
+- [2/x Pragmatic Rust for Engineers: Simulate and visualize a multi-bed Haber-Bosch Reactor](https://youtu.be/hofHT09H7bM) - 2023-12-21 6:30am CET
   -  [Tasks](haber_bosch/v2_tasks.md)
   -  [Hints](haber_bosch/src/v2_hints.rs)
   -  Solution consist of [main](haber_bosch/src/v2_main.rs) function and [configuration](haber_bosch/src/configuration.rs), [simulation](haber_bosch/src/simulation.rs) and [visualization](haber_bosch/src/visualization.rs) module.
-- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (TBA - approx Early January)
+- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (TBA - approx Mid-End of January)
 
 ## License
 
