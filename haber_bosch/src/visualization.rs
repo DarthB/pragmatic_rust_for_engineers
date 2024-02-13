@@ -10,7 +10,7 @@ use crate::configuration::HaberBoschInstance;
 
 
 /// Place new functions here:
-
+#[cfg(not(target_arch="wasm32"))]
 pub fn draw_temperature_over_yield(filename: &str, conf: &HaberBoschInstance) -> Result<(), Box<dyn std::error::Error>> {
     let resolution = (1920, 1080); 
     let mut draw_area = BitMapBackend::new(
@@ -46,7 +46,7 @@ pub fn draw_temperature_over_yield(filename: &str, conf: &HaberBoschInstance) ->
     Ok({})
 }
 
-
+#[cfg(not(target_arch="wasm32"))]
 pub fn draw_concentations(
     filename: &str,
     inst: &HaberBoschInstance,

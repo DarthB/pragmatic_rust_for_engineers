@@ -16,10 +16,17 @@ path = "src/v2_main_plot.rs"
 name = "hb_seq_simulation"
 path = "src/v2_main.rs"
 
+[lib]
+crate-type = ["cdylib"]
 
 [dependencies]
 ode_solvers = "0.3.7"
 plotters = "0.3.5"
 itertools = "0.12.0"
+
+wasm-bindgen = "0.2.78"
+wee_alloc = "0.4.5"
+console_error_panic_hook = "0.1"
+plotters-canvas = "^0.3.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
