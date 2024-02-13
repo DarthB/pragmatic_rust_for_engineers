@@ -1,5 +1,13 @@
 use wasm_bindgen::prelude::wasm_bindgen;
 
+mod configuration;
+mod simulation;
+mod visualization;
+mod v2_hints;
+
+pub mod web;
+pub mod web_visualization;
+
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
@@ -9,6 +17,7 @@ extern "C" {
     pub fn log(s: &str);
 }
 
+#[macro_export]
 macro_rules! console_log {
     // Note that this is using the `log` function imported above during
     // `bare_bones`
