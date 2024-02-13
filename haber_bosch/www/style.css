@@ -1,0 +1,68 @@
+html, body, main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: medium;
+}
+
+body {
+    margin-top: 1em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 33%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status {
+    color: grey;
+    font-size: 10px;
+    height: 15px
+}
+
+.control {
+    margin-top: 1em;
+}
+
+.control label {
+    font-weight: bold;
+    margin-right: 1em;
+}
+
+.control select {
+    padding: 0.25em 0.5em;
+}
+
+header {
+    font-size: 12px;
+    text-align: center;
+}
+
+.hide {
+	visibility: hidden;
+	height: 0px;
+}
+
+
+.rcorners1 {
+    border: 3px solid #E58339;
+    border-radius: 25px;
+    background: #FFFFFF;
+    padding: 10px;
+    margin: 5px;
+  }

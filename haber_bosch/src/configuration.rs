@@ -1,8 +1,12 @@
-use std::ops::Range;
+use std::{ops::Range, str::FromStr};
 
 use crate::simulation::{self, State, HaberBoschModel, HaberBoschSolverInfo};
 
 use::itertools::Itertools;
+
+use wasm_bindgen::prelude::*;
+
+use crate::v2_hints::*;
 
 #[derive(Debug, Copy, Clone)]
 pub enum Catalyst {
@@ -10,15 +14,87 @@ pub enum Catalyst {
     FN,
 }
 
+impl FromStr for Catalyst {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.trim().to_lowercase().as_str() {
+            "kmir" => Ok(Catalyst::KMIR),
+            "fn" => Ok(Catalyst::FN),
+            _ => Err("Unknown catalyst".to_owned()),
+        }
+    }
+}
+
 /// This data structure answers the question:
 /// // What data needs to be store and how can we support any number of reactor beds?
-#[derive(Debug, Copy, Clone)]
+#[wasm_bindgen]
+#[derive(Debug, Copy, Clone, Default)]
 pub struct HaberBoschBedSetup {
     pub beta: f64,
     pub t_start: f64,
     pub t_slope: f64,
     pub t_max: f64,
 }
+
+#[wasm_bindgen]
+impl HaberBoschBedSetup {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn from_constants(idx: u32, catalyst: &str) -> Self {
+        let cat = Catalyst::from_str(catalyst)
+            .map_err(|e| panic!("Cannot create HaberBoschBedSetup: {}", e))
+            .unwrap();
+
+        match cat {
+            Catalyst::KMIR => match idx {
+                0 => HaberBoschBedSetup {
+                    beta: KMIR_B1_B,
+                    t_start: KMIR_B1_TS,
+                    t_slope: KMIR_B1_TR,
+                    t_max: KMIR_B1_TM,
+                },
+                1 => HaberBoschBedSetup {
+                    beta: KMIR_B2_B,
+                    t_start: KMIR_B2_TS,
+                    t_slope: KMIR_B2_TR,
+                    t_max: KMIR_B2_TM,
+                },
+                2 => HaberBoschBedSetup {
+                    beta: KMIR_B3_B,
+                    t_start: KMIR_B3_TS,
+                    t_slope: KMIR_B3_TR,
+                    t_max: KMIR_B3_TM,
+                },
+                _ => panic!("BED {} not supported yet", idx),
+            },
+            Catalyst::FN => match idx {
+                0 => HaberBoschBedSetup {
+                    beta: FN_B1_B,
+                    t_start: FN_B1_TS,
+                    t_slope: FN_B1_TR,
+                    t_max: FN_B1_TM,
+                },
+                1 => HaberBoschBedSetup {
+                    beta: FN_B2_B,
+                    t_start: FN_B2_TS,
+                    t_slope: FN_B2_TR,
+                    t_max: FN_B2_TM,
+                },
+                2 => HaberBoschBedSetup {
+                    beta: FN_B3_B,
+                    t_start: FN_B3_TS,
+                    t_slope: FN_B3_TR,
+                    t_max: FN_B3_TM,
+                },
+                _ => panic!("BED {} not supported yet", idx),
+            },
+        }
+    }
+}
+
 
 /// This data structure answers the question:
 /// Use this structure to store results of ODE-solver (x_out and y_out), what is the dimensionality of y_out?

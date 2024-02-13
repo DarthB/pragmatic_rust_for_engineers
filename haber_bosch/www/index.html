@@ -4,27 +4,205 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pragmatic Rust for Engineers - Analysis Tool - Haber-Bosch</title>
+	<link rel="stylesheet" href="./style.css">
     </head>
     <body>
         <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
         <script src="./bootstrap.js"></script>
-        
-        <header>
+		
+		<header>
 			<a href="https://github.com/DarthB/pragmatic_rust_for_engineers" target="a">Source</a> |
 			<a href="https://github.com/DarthB/pragmatic_rust_for_engineers" target="a">Repo</a> |
 			<a href="https://github.com/plotters-rs/plotters-wasm-demo" target="a">WASM Example Project</a> |
 			<a href="https://www.youtube.com/watch?v=9DU2oglBj54&list=PLHIuHn1Vy0yA2LbDYAGHuziFVI7YCFCDF" target="a">YouTube Playlist</a> |
 			<a href="https://janus.rs" target="a">Janus IT and friends</a>
 		</header>
-        
-        <div>
-            <div id="status">Status: Loading WebAssembly...</div>
-            <div id="coord">Mouse Cursor in Plot</div>
-            <div><label for="catalyst">Catalyst: </label><select id="catalyst"><option>KMIR</option><option>FN</option></select></div>
-            <div><label for="pressure">Pressure: </label>
-                <input type="range" min="180" max="220" id="pressure" value="200" /> <span id="pressure_out">200</span> bar</div>
-            </div>
-         <canvas id="canvas" width="800px" height="600px"></canvas>
-
-      </body>
+		
+		<main>
+			<div class="rcorners1">
+				<h1>Pragmatic Rust for Engineers - Analysis Tool - Haber-Bosch</h1>
+				<div class="row">
+					<div class="status">Information (Mouse-Cursor | Rendering Time):&nbsp;</div>
+					<div id="coord" class="status">Mouse pointer is out of range</div> 
+					<div class="status">&nbsp;|&nbsp;</div>
+					<div id="status" class="status">Status: Loading WebAssembly...</div>
+				</div>
+				<div class="control">
+					<label for="plot_type">Plot-Type: </label>
+					<select id="plot_type">
+						<option value="cbt">Concentration Balances and Temperature</option>
+						<option value="toy">Temperature over Yield</option>
+					</select>
+					<b>||</b> <input id="auto_ranges" type="checkbox" checked="true">Auto Axis Ranges</input>
+					<b>||</b> <input id="diff_tool" type="checkbox">Use Diff Tool</input>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column control rcorners1">
+					<b>Main Scenario:</b> <button disabled type="button" id="btn_default">Default</button><hr/>
+					<nobr>
+					<label for="catalyst_lhs">Catalyst: </label>
+					<select id="catalyst_lhs">
+						<option value="KMIR">KMIR</option>
+						<option value="FN">FN</option>
+					</select>
+					</nobr><br/>
+					<nobr>
+					<label for="pressure_lhs">Pressure: </label>
+					<input type="range" min="180" max="220" id="pressure_lhs" value="200" />
+					<span id="pressure_lhs_ro">200</span><span> [Bar]</span>
+					</nobr><br/>
+					<nobr>
+					<label for="num_beds_lhs">Reactor Beds: </label>
+					<input type="range" min="1" max="3" id="num_beds_lhs" value="2" />
+					<span id="num_beds_lhs_ro">2</span><span> [-]</span>
+					</nobr><br />
+					<hr/>
+					<div id="bed1_lhs">
+						<b>Bed 1 Parameters:</b><br />
+						<nobr>
+						<label for="bed01_start_temp_lhs">Bed 1 Temperature: </label>
+						<input type="range" min="400" max="450" id="bed01_start_temp_lhs" value="440" />
+						<span id="bed01_start_temp_lhs_ro">400</span><span> [C°]</span>
+						</nobr><br />
+						<!--
+						<nobr>
+						<label for="bed01_slope_temp_lhs">Bed 1 Delta T: </label>
+						<input type="range" min="1" max="50" id="bed01_slope_temp_lhs" value="30" />
+						<span id="bed01_slope_temp_lhs_ro">30</span><span> [C°]</span>
+						</nobr><br />
+						-->
+					</div>
+					<hr/>
+					<div id="bed2_lhs">
+						<b>Bed 2 Parameters:</b><br />
+						<nobr>
+						<label for="bed02_start_temp_lhs">Bed 2 Temperature: </label>
+						<input type="range" min="400" max="450" id="bed02_start_temp_lhs" value="440" />
+						<span id="bed02_start_temp_lhs_ro">400</span><span> [C°]</span>
+						</nobr><br />
+						<!--
+						<nobr>
+						<label for="bed02_slope_temp_lhs">Bed 2 Delta T: </label>
+						<input type="range" min="1" max="50" id="bed02_slope_temp_lhs" value="30" />
+						<span id="bed02_slope_temp_lhs_ro">30</span><span> [C°]</span>
+						</nobr><br />
+						-->	
+					</div>
+					<hr/>
+					<div id="bed3_lhs" class="hide">
+						<b>Bed 3 Parameters:</b><br />
+						<nobr>
+						<label for="bed03_start_temp_lhs">Bed 3 Temperature: </label>
+						<input type="range" min="400" max="450" id="bed03_start_temp_lhs" value="440" />
+						<span id="bed03_start_temp_lhs_ro">400</span><span> [C°]</span>
+						</nobr><br />
+						<!--
+						<nobr>
+						<label for="bed03_slope_temp_lhs">Bed 3 Delta T: </label>
+						<input type="range" min="1" max="50" id="bed03_slope_temp_lhs" value="30" />
+						<span id="bed03_slope_temp_lhs_ro">30</span><span> [C°]</span>
+						</nobr><br />	
+						-->
+					</div>
+					<hr/>
+					<div id="range_control" class="column control hide">
+						<b>Axis-Range Settings</b><hr />
+						<nobr>
+						<label for="x_max">Length-Range: </label>
+						<input type="range" min="0" max="50" id="x_max" value="30" />
+						<span id="x_max_ro">3.0</span><span> [-]</span>
+						</nobr><br/>
+						<nobr>
+						<label for="c_max">Concentration-Range: </label>
+						<input type="range" min="0" max="100" id="c_max" value="75" />
+						<span id="c_max_ro">0.75</span><span> [-]</span>
+						</nobr><br/>
+						<nobr>
+						<label for="t_min">Min Temperature: </label>
+						<input type="range" min="350" max="400" id="t_min" value="30" />
+						<span id="t_min_ro">400</span><span> [C°]</span>
+						</nobr><br/>
+						<nobr>
+						<label for="t_max">Max Temperature: </label>
+						<input type="range" min="450" max="500" id="t_max" value="75" />
+						<span id="t_max_ro">450</span><span> [C°]</span>
+						</nobr><br/>
+					</div>
+				</div>
+				<canvas id="canvas" class="column rcorners1" width="500px" height="330px"></canvas>
+				<div id="alternative_scenario_control" class="column control hide rcorners1">
+					<b>Alternative Scenario:</b> <button disabled type="button" id="btn_alt_default">Default</button><hr/>
+					<nobr>
+					<label for="catalyst_rhs">Catalyst: </label>
+					<select id="catalyst_rhs">
+						<option value="KMIR">KMIR</option>
+						<option selected value="FN">FN</option>
+					</select>
+					</nobr><br/>
+					<nobr>
+					<label for="pressure_rhs">Pressure: </label>
+					<input type="range" min="85" max="115" id="pressure_rhs" value="100" />
+					<span id="pressure_rhs_ro">100</span><span> [Bar]</span>
+					</nobr><br/>
+					<nobr>
+					<label for="num_beds_rhs">Reactor Beds: </label>
+					<input type="range" min="1" max="3" id="num_beds_rhs" value="2" />
+					<span id="num_beds_rhs_ro">2</span><span> [-]</span>
+					</nobr><br />
+					<hr/>
+					<div id="bed1_rhs">
+						<b>Bed 1 Parameters:</b><br />
+						<nobr>
+						<label for="bed01_start_temp_rhs">Bed 1 Temperature: </label>
+						<input type="range" min="300" max="420" id="bed01_start_temp_rhs" value="370" />
+						<span id="bed01_start_temp_rhs_ro">370</span><span> [C°]</span>
+						</nobr><br />
+						<nobr>
+						<!--
+						
+						<label for="bed01_slope_temp_rhs">Bed 1 Delta T: </label>
+						<input type="range" min="10" max="80" id="bed01_slope_temp_rhs" value="30" />
+						<span id="bed01_slope_temp_rhs_ro">30</span><span> [C°]</span>
+						</nobr><br />
+						-->
+					</div>
+					<hr/>
+					<div id="bed2_rhs">
+						<b>Bed 2 Parameters:</b><br />
+						<nobr>
+						<label for="bed02_start_temp_rhs">Bed 2 Temperature: </label>
+						<input type="range" min="300" max="420" id="bed02_start_temp_rhs" value="350" />
+						<span id="bed02_start_temp_rhs_ro">350</span><span> [C°]</span>
+						</nobr><br />
+						<!--
+						
+						<nobr>
+						<label for="bed02_slope_temp_rhs">Bed 2 Delta T: </label>
+						<input type="range" min="10" max="80" id="bed02_slope_temp_rhs" value="30" />
+						<span id="bed02_slope_temp_rhs_ro">30</span><span> [C°]</span>
+						</nobr><br />
+						!-->
+					</div>
+					<hr/>
+					<div id="bed3_rhs" class="hide">
+						<b>Bed 3 Parameters:</b><br />
+						<nobr>
+						<label for="bed03_start_temp_rhs">Bed 3 Temperature: </label>
+						<input type="range" min="300" max="420" id="bed03_start_temp_rhs" value="320" />
+						<span id="bed03_start_temp_rhs_ro">320</span><span> [C°]</span>
+						</nobr><br />
+						<!--
+						<nobr>
+						<label for="bed03_slope_temp_rhs">Bed 3 Delta T: </label>
+						<input type="range" min="10" max="80" id="bed03_slope_temp_rhs" value="30" />
+						<span id="bed03_slope_temp_rhs_ro">10</span><span> [C°]</span>
+						</nobr><br />
+						!-->
+					</div>
+					<hr/>
+				</div>
+			</div>
+		</main>
+    </body>
 </html>

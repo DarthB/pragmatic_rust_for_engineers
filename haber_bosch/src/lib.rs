@@ -6,6 +6,7 @@ mod visualization;
 mod v2_hints;
 
 pub mod web;
+pub mod web_range;
 pub mod web_visualization;
 
 #[global_allocator]

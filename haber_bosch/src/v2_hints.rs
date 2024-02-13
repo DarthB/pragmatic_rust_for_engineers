@@ -17,7 +17,7 @@ pub const FN_B1_B: f64 = -2.691122; // beta
 // FN Bed 2 Constants
 pub const FN_B2_TS: f64 = 350. + 273.; // [K°] Starting temperature
 pub const FN_B2_TR: f64 = 15.; // [K°] Raise of temperature
-pub const FN_B2_TM: f64 = 490. + 237.; // [K°] Max temperature (constants invalid out of this are)
+pub const FN_B2_TM: f64 = 490. + 273.; // [K°] Max temperature (constants invalid out of this are)
 pub const FN_B2_B: f64 = -2.708; // beta
 
 // Catalyst KMIR Constants
@@ -30,14 +30,34 @@ pub const KMIR_REACTOR_PRESSURE: f64 = 200.; // pressure inside the reactor for 
 // KMIR Bed 1 Constants
 pub const KMIR_B1_TS: f64 = 440. + 273.; // [K°] Starting temperature
 pub const KMIR_B1_TR: f64 = 10.; // [K°] Raise of temperature
-pub const KMIR_B1_TM: f64 = 490. + 237.; // [K°] Max temperature (constants invalid out of this are)
+pub const KMIR_B1_TM: f64 = 490. + 273.; // [K°] Max temperature (constants invalid out of this are)
 pub const KMIR_B1_B: f64 = -2.691122; // beta
 
 // KMIR Bed 2 Constants
 pub const KMIR_B2_TS: f64 = 400. + 273.; // [K°] Starting temperature
 pub const KMIR_B2_TR: f64 = 7.5; // [K°] Raise of temperature
-pub const KMIR_B2_TM: f64 = 490. + 237.; // [K°] Max temperature (constants invalid out of this are)
+pub const KMIR_B2_TM: f64 = 490. + 273.; // [K°] Max temperature (constants invalid out of this are)
 pub const KMIR_B2_B: f64 = -2.708; // beta
+
+//---------------------------------------------------------
+// Additional Bed Constants for the UI of the analysis tool
+//---------------------------------------------------------
+
+// KMIR Bed 3 Constants
+pub const KMIR_B3_TS: f64 = 360. + 273.; // [K°] Starting temperature
+pub const KMIR_B3_TR: f64 = 5.; // [K°] Raise of temperature
+pub const KMIR_B3_TM: f64 = 490. + 273.; // [K°] Max temperature (constants invalid out of this are)
+pub const KMIR_B3_B: f64 = -2.708; // beta
+
+// FN Bed 3 Constants
+pub const FN_B3_TS: f64 = 320. + 273.; // [K°] Starting temperature
+pub const FN_B3_TR: f64 = 10.; // [K°] Raise of temperature
+pub const FN_B3_TM: f64 = 490. + 273.; // [K°] Max temperature (constants invalid out of this are)
+pub const FN_B3_B: f64 = -2.708; // beta
+
+//---------------------------------------------------------------
+// Additional Constants for the input ranges of the analysis tool
+//---------------------------------------------------------------
 
 // The function that calculates our more sophistcated model
 // Feel free to copy this block instead of implementing it on your own.
