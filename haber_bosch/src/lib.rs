@@ -33,5 +33,4 @@ pub fn hook_panic_handler() {
 pub fn test_method() {
     let num = 42;
     console_log!("Hello Javascript {}", num);
-    panic!("That so exciting.");
 }

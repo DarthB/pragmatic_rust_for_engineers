@@ -9,4 +9,5 @@ async function init() {
     
     hook_panic_handler();
     test_method(); // check bindings of JS outputs into Rust
+    main();
 }
