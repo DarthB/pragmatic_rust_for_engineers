@@ -20,7 +20,10 @@
         <div>
             <div id="status">Status: Loading WebAssembly...</div>
             <div id="coord">Mouse Cursor in Plot</div>
-         </div>
+            <div><label for="catalyst">Catalyst: </label><select id="catalyst"><option>KMIR</option><option>FN</option></select></div>
+            <div><label for="pressure">Pressure: </label>
+                <input type="range" min="180" max="220" id="pressure" value="200" /> <span id="pressure_out">200</span> bar</div>
+            </div>
          <canvas id="canvas" width="800px" height="600px"></canvas>
 
       </body>

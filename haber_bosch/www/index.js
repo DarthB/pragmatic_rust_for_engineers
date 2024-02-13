@@ -4,6 +4,10 @@ const canvas = document.getElementById("canvas");
 const coord = document.getElementById("coord");
 const status = document.getElementById("status");
 
+const catalyst = document.getElementById("catalyst");
+const pressure = document.getElementById("pressure");
+const pressure_out = document.getElementById("pressure_out");
+
 let chart = null;
 
 /** Main entry point */
@@ -21,6 +25,14 @@ export function setup(WasmChart) {
 function setupUI() {
     window.addEventListener("resize", setupCanvas);
     window.addEventListener("mousemove", onMouseMove);
+
+    catalyst.addEventListener("change", updatePlot);
+    pressure.addEventListener("change", onPressureChange);
+}
+
+function onPressureChange() {
+    pressure_out.innerText = pressure.value;
+    updatePlot();
 }
 
 function setupCanvas() {
@@ -57,8 +69,8 @@ function updatePlot() {
 
     chart = null;
     const start = performance.now();
-    var pres = 100;
-    var cat = "FN"
+    var pres = Number(pressure.value);
+    var cat = catalyst.selectedOptions[0].value;
     chart = WebChart.draw_concentration_balances("canvas", cat, pres);
 	const end = performance.now();
 
