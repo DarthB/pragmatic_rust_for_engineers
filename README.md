@@ -10,12 +10,9 @@ In the first part of the series we will investigate the Haber-Bosch process for 
 
 [Read Jonathan Ayalas Blog Article](https://janus.rs/en/2023/12/the-haber-bosch-process-revolutionizing-agriculture-and-industry/) about Haber-Bosch if you want to learn more.
 
-The diagrams were investigating are Concentration Balance Diagrams and Temperature over Yield diagrams:
+We conclude the first season of Pragmatic Rust for Engineers with a WebAssembly powered tool to analyze the Haber-Bosch reaction.
 
-![](haber_bosch/res/HB_KMIR_conc.png)
-
-![](haber_bosch/res/HB_FN_temp_yield.png)
-
+![](haber_bosch/res/C_04b.png)
 
 ## How to Learn with Pragmatic Rust for Engineers
 
@@ -53,8 +50,11 @@ Beware sometimes we add the link here but the Video is scheduled later on YouTub
   -  [Tasks](haber_bosch/v2_tasks.md)
   -  [Hints](haber_bosch/src/v2_hints.rs)
   -  Solution consist of [main](haber_bosch/src/v2_main.rs) function and [configuration](haber_bosch/src/configuration.rs), [simulation](haber_bosch/src/simulation.rs) and [visualization](haber_bosch/src/visualization.rs) module.
-- 3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly) - (TBA - approx Mid-End of January)
-
+- [3/x Pragmatic Rust for Engineers: Interactive Haber-Bosch via WASM (Web Assembly)](https://www.youtube.com/watch?v=LW_Vy3QNwX4) - 
+  - [Tasks](haber_bosch/v3_tasks.md)
+  - [Hints] Contains the implementation we have at the end of the video, see the branch `tj_hints_v3` - or this [git commit](https://github.com/DarthB/pragmatic_rust_for_engineers/commit/8da04a6bb19e023c3f8e59613ea7af3be3469567)
+  - [Solution] - Contains the tool that was used to do the analysis in the Video
+ 
 ## License
 
 All the code is dual-licensed under either:
