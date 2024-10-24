@@ -8,9 +8,9 @@ version = "0.1.0"
 edition = "2021"
 
 description = "These crates contain the source code developed for the 'Pragmatic Rust for Engineers' course. See the README.md for more details."
-readme = "README.md"
-
+repository = "https://github.com/DarthB/pragmatic_rust_for_engineers"
 license = "MIT or Apache-2.0"
+readme = "README.md"
 
 keywords = ["learning", "engineering", "simulation", "science"]
 categories = ["science", "simulation"]

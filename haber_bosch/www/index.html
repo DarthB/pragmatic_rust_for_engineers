@@ -19,15 +19,14 @@
 		</header>
 		
 		<main>
-			<div class="rcorners1">
+			<div class="row">
+			<span class="status">Information (Mouse-Cursor | Rendering Time):&nbsp;</span>
+			<span id="coord" class="status">Mouse pointer is out of range</span> 
+			<span id="status" class="status">Status: Loading WebAssembly...</span>
+			</div>
+			<!-- <div class="rcorners1"> !-->
 				<h1>Pragmatic Rust for Engineers - Analysis Tool - Haber-Bosch</h1>
 				<div class="row">
-					<div class="status">Information (Mouse-Cursor | Rendering Time):&nbsp;</div>
-					<div id="coord" class="status">Mouse pointer is out of range</div> 
-					<div class="status">&nbsp;|&nbsp;</div>
-					<div id="status" class="status">Status: Loading WebAssembly...</div>
-				</div>
-				<div class="control">
 					<label for="plot_type">Plot-Type: </label>
 					<select id="plot_type">
 						<option value="cbt">Concentration Balances and Temperature</option>
@@ -36,7 +35,8 @@
 					<b>||</b> <input id="auto_ranges" type="checkbox" checked="true">Auto Axis Ranges</input>
 					<b>||</b> <input id="diff_tool" type="checkbox">Use Diff Tool</input>
 				</div>
-			</div>
+				
+			<!-- </div> !-->
 			<div class="row">
 				<div class="column control rcorners1">
 					<b>Main Scenario:</b> <button disabled type="button" id="btn_default">Default</button><hr/>
@@ -130,7 +130,9 @@
 						</nobr><br/>
 					</div>
 				</div>
-				<canvas id="canvas" class="column rcorners1" width="500px" height="330px"></canvas>
+				<canvas id="canvas" class="column rcorners1"></canvas>
+			</div>
+			<div class="row">
 				<div id="alternative_scenario_control" class="column control hide rcorners1">
 					<b>Alternative Scenario:</b> <button disabled type="button" id="btn_alt_default">Default</button><hr/>
 					<nobr>
@@ -201,6 +203,9 @@
 						!-->
 					</div>
 					<hr/>
+				</div>
+				<div class="rcorners1 column" id="canvas_sized_disp_el">
+					&nbsp;
 				</div>
 			</div>
 		</main>

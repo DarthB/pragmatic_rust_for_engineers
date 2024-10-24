@@ -2,15 +2,12 @@ use wasm_bindgen::prelude::wasm_bindgen;
 
 mod configuration;
 mod simulation;
-mod visualization;
 mod v2_hints;
+mod visualization;
 
 pub mod web;
 pub mod web_range;
 pub mod web_visualization;
-
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 extern "C" {

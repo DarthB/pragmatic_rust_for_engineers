@@ -6,6 +6,8 @@ html, body, main {
 
 h1 {
     font-size: medium;
+    margin: 1px;
+    padding: 1px;
 }
 
 body {
@@ -17,10 +19,8 @@ body {
 
 .row {
     display: flex;
-}
-
-.column {
-    flex: 33%;
+    text-align: left;
+    align-items: left;
 }
 
 main {
@@ -35,8 +35,14 @@ main {
     height: 15px
 }
 
+.column {
+    display: block;
+}
+
 .control {
     margin-top: 1em;
+    width: 350px;
+    display: inline-block;
 }
 
 .control label {
@@ -57,7 +63,6 @@ header {
 	visibility: hidden;
 	height: 0px;
 }
-
 
 .rcorners1 {
     border: 3px solid #E58339;

@@ -4,6 +4,7 @@ class WebModelRange {}
 class HaberBoschBedSetup {}
 
 const canvas = document.getElementById("canvas");
+const csde = document.getElementById("canvas_sized_disp_el");
 const coord = document.getElementById("coord");
 const status = document.getElementById("status");
 
@@ -233,12 +234,19 @@ function update(sender, ro, redraw_flag, factor) {
 /** Setup canvas to properly handle high DPI and redraw current plot. */
 function setupCanvas() {
 	const dpr = window.devicePixelRatio || 1.0;
-    const aspectRatio = canvas.width / canvas.height;
-    const size = canvas.parentNode.offsetWidth * 0.8;
-    canvas.style.width = size + "px";
-    canvas.style.height = size / aspectRatio + "px";
-    canvas.width = size;
-    canvas.height = size / aspectRatio;
+	let parentWidth = window.innerWidth;
+    let parentHeight = window.innerHeight;
+    let aspectRatio = parentWidth / parentHeight;
+    //const size = parentWidth * 1.0;
+	let size = window.innerWidth - 500;
+	//size = 2000;
+    //canvas.style.width = size + "px";
+    //canvas.style.height = size + "px";
+    canvas.width = size * dpr;
+    canvas.height = (size / aspectRatio) * dpr;
+
+	csde.style.width = (size*dpr) + "px";
+
     updateHBPlot();
 }
 

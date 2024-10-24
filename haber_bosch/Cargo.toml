@@ -2,6 +2,9 @@
 name = "haber_bosch"
 version = "0.1.0"
 edition = "2021"
+description = "These crates contain the source code for the Haber Bosch Simulation of the Pragmatic Rust for Engineers video series. See the README.md for more details."
+repository = "https://github.com/DarthB/pragmatic_rust_for_engineers"
+license = "MIT or Apache-2.0"
 default-run = "hb_seq_simulation"
 
 [[bin]]
@@ -25,7 +28,6 @@ plotters = "0.3.5"
 itertools = "0.12.0"
 
 wasm-bindgen = "0.2.78"
-wee_alloc = "0.4.5"
 console_error_panic_hook = "0.1"
 plotters-canvas = "^0.3.0"
 
